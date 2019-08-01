@@ -38,11 +38,16 @@
 			],
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
+					"type": "basic",
+					"basic": [
 						{
-							"key": "token",
-							"value": "{{mytoken_g}}",
+							"key": "password",
+							"value": "{{pw_g}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username_g}}",
 							"type": "string"
 						}
 					]
@@ -144,11 +149,16 @@
 			],
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
+					"type": "basic",
+					"basic": [
 						{
-							"key": "token",
-							"value": "{{mytoken_g}}",
+							"key": "password",
+							"value": "{{pw_g}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username_g}}",
 							"type": "string"
 						}
 					]

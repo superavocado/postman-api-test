@@ -12,13 +12,13 @@
 			"enabled": true
 		},
 		{
-			"key": "mytoken_g",
-			"value": "a6be561e37c9e50ff745d7c474d4196b6f60338d",
+			"key": "pw_g",
+			"value": "Test007@github",
 			"enabled": true
 		}
 	],
 	"name": "My Workspace Globals",
 	"_postman_variable_scope": "globals",
-	"_postman_exported_at": "2019-08-01T06:19:52.353Z",
+	"_postman_exported_at": "2019-08-01T12:08:03.058Z",
 	"_postman_exported_using": "Postman/7.3.4"
 }
