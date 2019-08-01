@@ -1,0 +1,24 @@
+{
+	"id": "b8522f76-9ff6-47e8-8218-9fb6ff844dea",
+	"values": [
+		{
+			"key": "rootendpoint_g",
+			"value": "https://api.github.com",
+			"enabled": true
+		},
+		{
+			"key": "username_g",
+			"value": "test007-github",
+			"enabled": true
+		},
+		{
+			"key": "mytoken_g",
+			"value": "a6be561e37c9e50ff745d7c474d4196b6f60338d",
+			"enabled": true
+		}
+	],
+	"name": "My Workspace Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2019-08-01T06:19:52.353Z",
+	"_postman_exported_using": "Postman/7.3.4"
+}

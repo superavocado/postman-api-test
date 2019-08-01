@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "node"
+
+install:
+  - npm install newman
+
+before_script:
+  - node --version
+  - npm --version
+  - node_modules/.bin/newman --version
+
+script:
+  - node_modules/.bin/newman run github-api-users/github-api-users.postman_collection.json
+   -e github-api-users/github-api-users.postman_environment.json  
+   -g github-api.postman_globals.json

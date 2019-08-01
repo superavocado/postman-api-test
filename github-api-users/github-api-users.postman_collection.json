@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "2678d621-199b-49fe-90d6-b88ab46e426d",
+		"name": "github-api-users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users - Get the authenticated user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8391b20a-041c-4987-8e24-bc6e051d62f3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e35a0c2-622a-4066-af73-a65f949162e2",
+						"exec": [
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check the username\", function () {",
+							"    pm.expect(response.login).to.eql(pm.globals.get(\"username_g\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{mytoken_g}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rootendpoint_g}}/user",
+					"host": [
+						"{{rootendpoint_g}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Get a single user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0fe2c070-f2e0-4903-bf1d-a65a6face937",
+						"exec": [
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check the username\", function(){",
+							"   pm.expect(response.login).to.eql(pm.globals.get(\"username_g\")); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rootendpoint_g}}/users/{{username_g}}",
+					"host": [
+						"{{rootendpoint_g}}"
+					],
+					"path": [
+						"users",
+						"{{username_g}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Update the authenticated user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "af57966e-9623-4854-87e8-4be6d75b0e0b",
+						"exec": [
+							"const new_name = \"tester\" + Math.floor((Math.random()*100)+1);",
+							"const new_company = \"company\" + Math.floor((Math.random()*100)+1);",
+							"const new_location = \"VIC\" + Math.floor((Math.random()*100)+1);",
+							"pm.environment.set(\"new_name_e\", new_name);",
+							"pm.environment.set(\"new_company_e\", new_company);",
+							"pm.environment.set(\"new_location_e\", new_location);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "40525c58-d966-49ff-8d4b-c9b619986c90",
+						"exec": [
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check the name\", function(){",
+							"    pm.expect(response.name).to.eql(pm.environment.get(\"new_name_e\"));",
+							"});",
+							"pm.test(\"Check the company\", function(){",
+							"    pm.expect(response.company).to.eql(pm.environment.get(\"new_company_e\"));",
+							"});",
+							"pm.test(\"Check the location\", function(){",
+							"    pm.expect(response.location).to.eql(pm.environment.get(\"new_location_e\"));",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{mytoken_g}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"{{new_name_e}}\",\n  \"company\": \"{{new_company_e}}\",\n  \"location\": \"{{new_location_e}}\"\n}"
+				},
+				"url": {
+					"raw": "{{rootendpoint_g}}/user",
+					"host": [
+						"{{rootendpoint_g}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Get all users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b52f58d5-512d-41a4-bf34-a017886e2f9f",
+						"exec": [
+							"const random_userID = Math.floor(Math.random()*1000);",
+							"pm.environment.set(\"random_userID_e\", random_userID);",
+							"//console.log(random_userID);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7cf12e1d-8b2b-4300-92ca-b6e1165a0086",
+						"exec": [
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function(){",
+							"   pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check the first user id\", function(){",
+							"    pm.expect(response[0].id).to.be.at.least(pm.environment.get(\"random_userID_e\") + 1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rootendpoint_g}}/users?since={{random_userID_e}}",
+					"host": [
+						"{{rootendpoint_g}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "since",
+							"value": "{{random_userID_e}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a02dce34-4170-434b-816d-7e2d34cb75bd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a67f4201-c509-465d-b7e4-921fa41a9e63",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
